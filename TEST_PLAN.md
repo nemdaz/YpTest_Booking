@@ -68,6 +68,7 @@ El plan de pruebas se enmarca al modulo 010100 del sistema Booking la cual corre
 | Software | jenkins-cli                    | Cliente de linea de comandos de Jenkins                                                                                                |
 | Software | appium v2                      | Appium es un Framework de automatización de pruebas de código abierto para usar con aplicaciones web nativas, híbridas y móviles. |
 | Software | uiautomator2                   | Driver necesario para la conección entre Appium y el dispositivo                                                                      |
+| Software | appium-inspector               | Aplicativo desktop para inspeccionar apps/apk en el proceso de pruebas.                                                                |
 | Software | appium-doctor                  | Para verificar si cumplimos con lo requisitos para usar Appium                                                                         |
 | Hardware | Smartphone Xiaomi (Android 13) | Dispositivo de pruebas Android.                                                                                                        |
 
@@ -84,6 +85,7 @@ De acuerdo a lo indicado en el punto "4. Entorno de Pruebas" se realiza la confi
 - Descargar la version war de Jenkins desde la url https://www.jenkins.io/download/.
 - Descargar e instalar NodeJs de manera global, usar la url https://nodejs.org/en/.
 - Descargar e instalar Eclipse IDE 2022-12.
+- Descargar e instalar Appium Inspector desde [https://github.com/appium/appium-inspector](https://github.com/appium/appium-inspector).
 
 ##### Configuración
 
@@ -161,7 +163,6 @@ De acuerdo a lo indicado en el punto "4. Entorno de Pruebas" se realiza la confi
   M2_HOME = D:\Program Files\apache-maven-3.8.3
   ```
 
-
 ### 6. Estrategías de Pruebas !!
 
 Para el cumplimiento de los objetivos se plantean estrategías de pruebas las cuales estarán en funcion a los siguientes tipos, niveles y técnicas de pruebas.
@@ -213,6 +214,5 @@ El proyecto es aprobado si se satisface los siguientes criterios de aceptación:
 | Tipo de Prueba      | Tipo de Ejecución | Entregable | Descripción |
 | :------------------ | :----------------- | :--------- | :----------- |
 | Pruebas Funcionales | Automatizada       |            |              |
-
 
 END
