@@ -9,5 +9,4 @@ Feature: Realizar reserva de habitación en Booking.com.
     And que permita niño de edad:
     	| 5 |
     And hacemos click en el boton "Buscar"
-    Then se muestra la lista de hoteles que cumplen nuestros criterios
-    And comprobamos que existan al menos 2 hoteles.
+    Then se muestra la lista de hoteles con al menos 2 resultados cumplen los criterios.

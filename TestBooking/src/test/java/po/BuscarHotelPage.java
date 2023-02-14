@@ -1,6 +1,7 @@
 package po;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -188,8 +189,7 @@ public class BuscarHotelPage extends BaseAppium {
 		// APLICAR CANTIDADES
 		UtilDelay.coolDelay(2000);
 		WebElement aplicarCantidades = adriver.findElement(AppiumBy.id("com.booking:id/group_config_apply_button"));
-		aplicarCantidades.click();
-		
+		aplicarCantidades.click();		
 	}
 	
 	public void seleccionaEdadNinos(int edad) {
@@ -222,7 +222,23 @@ public class BuscarHotelPage extends BaseAppium {
 	public void buscamosHoteles() {
 		WebElement btnBuscar = adriver.findElement(AppiumBy.id("com.booking:id/facet_search_box_cta"));
 		btnBuscar.click();
-		UtilDelay.coolDelay(10 * 1000);
+		UtilDelay.coolDelay(5 * 1000);
+	}
+	
+	public List<String> resultadoHoteles() {
+		WebElement containerResultados = adriver.findElement(AppiumBy.id("com.booking:id/results_list_facet")); //FrameLayout
+		List<WebElement> listaHoteles = containerResultados.findElements(AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup"));
+		listaHoteles.remove(0); // Quita texto de cantidad de hoteles
+		List<String> resultadoHoteles = new ArrayList<>();
+		
+		String nameHotelXpath = "//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView";
+		
+		for (WebElement containerHotel : listaHoteles) {
+			WebElement hotelText = containerHotel.findElement(AppiumBy.xpath(nameHotelXpath));
+			resultadoHoteles.add(hotelText.getText());
+		}
+		
+		return resultadoHoteles;
 	}
 
 }

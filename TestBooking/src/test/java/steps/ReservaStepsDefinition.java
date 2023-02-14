@@ -55,18 +55,14 @@ public class ReservaStepsDefinition implements En {
 			buscarHotelPage.buscamosHoteles();
 		});
 		
-		Then("se muestra la lista de hoteles que cumplen nuestros criterios", () -> {
-			// Write code here that turns the phrase above into concrete actions
-		    throw new io.cucumber.java8.PendingException();
+		Then("se muestra la lista de hoteles con al menos {int} resultados cumplen los criterios.", (Integer minCant) -> {
+			BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
+			List<String> resultado = buscarHotelPage.resultadoHoteles();
 		});
 		
-		And("comprobamos que existan al menos {int} hoteles.", (Integer minHoteles) -> {
-			// Write code here that turns the phrase above into concrete actions
-		    throw new io.cucumber.java8.PendingException();
-		});
 		
 		After(()->{
-			UtilDelay.coolDelay(10000);
+			UtilDelay.coolDelay(50 * 1000);
 			apiumBase.shutDown();
 		});
 	}
