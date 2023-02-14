@@ -76,7 +76,31 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		// SCENARIO
-		Given("Estamos ubicados en la UI de lista de hoteles.", ()->{
+		Given("Estamos en la lista de resulado, seleccionamos el resultado {int} de la lista.", (Integer position)->{
+			
+		});
+		
+		When("nos muestra el detalle del hotel", ()->{
+					
+		});
+		
+		And("seleccionamos alguno de los botones para ver las habitaciones, botones:", (DataTable posibleBotones)->{
+			
+		});
+		
+		Then("se muestra las habitaciones disponibles y sus precios", ()->{
+			
+		});
+		
+		And("podemos seleccionar la habitación 1 de la lista para Información", ()->{
+			
+		});
+		
+		And("en la Información de la habitación se muestra el mismo precio de lista", ()->{
+			
+		});
+		
+		And("la sección Reserva muestra el mismo precio que en la Información.", ()->{
 			
 		});
 		
