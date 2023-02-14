@@ -224,21 +224,5 @@ public class BuscarHotelPage extends BaseAppium {
 		btnBuscar.click();
 		UtilDelay.coolDelay(5 * 1000);
 	}
-	
-	public List<String> resultadoHoteles() {
-		WebElement containerResultados = adriver.findElement(AppiumBy.id("com.booking:id/results_list_facet")); //FrameLayout
-		List<WebElement> listaHoteles = containerResultados.findElements(AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup"));
-		listaHoteles.remove(0); // Quita texto de cantidad de hoteles
-		List<String> resultadoHoteles = new ArrayList<>();
-		
-		String nameHotelXpath = "//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView";
-		
-		for (WebElement containerHotel : listaHoteles) {
-			WebElement hotelText = containerHotel.findElement(AppiumBy.xpath(nameHotelXpath));
-			resultadoHoteles.add(hotelText.getText());
-		}
-		
-		return resultadoHoteles;
-	}
 
 }
