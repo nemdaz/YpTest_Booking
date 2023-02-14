@@ -101,10 +101,10 @@ public class BuscarHotelPage extends BaseAppium {
 		// Action: Habitacion
 		WebElement containerHab = adriver.findElement(AppiumBy.id("com.booking:id/group_config_rooms_count"));
 		WebElement cantHab = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
-		WebElement cantHabAdd = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_remove_button"));
-		WebElement cantHabRem = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_add_button"));
+		WebElement cantHabAdd = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_add_button"));
+		WebElement cantHabRem = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_remove_button"));
 
-		System.out.println("Cantidad: " + cantHab.getText());
+		System.out.println("Cantidad Hab: " + cantHab.getText());
 
 		int _cantHabitacion = Integer.parseInt(cantHab.getText());
 
@@ -112,19 +112,23 @@ public class BuscarHotelPage extends BaseAppium {
 		while (_cantHabitacion != this.cantHabitacion && intentoClickH < 20) {
 			if (_cantHabitacion < this.cantHabitacion) {
 				cantHabAdd.click();
+				System.out.println("Cantidad : Add" + cantHab.getText());
 			}
 			if (_cantHabitacion > this.cantHabitacion) {
 				cantHabRem.click();
+				System.out.println("Cantidad : Rem" + cantHab.getText());
 			}
+			cantHab = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
+			_cantHabitacion = Integer.parseInt(cantHab.getText());
 			intentoClickH++;
 		}
 		// Action: Adultos
 		WebElement containerAdult = adriver.findElement(AppiumBy.id("com.booking:id/group_config_adults_count"));
 		WebElement cantAdu = containerAdult.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
-		WebElement cantAduAdd = containerAdult.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_remove_button"));
-		WebElement cantAduRem = containerAdult.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_add_button"));
+		WebElement cantAduAdd = containerAdult.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_add_button"));
+		WebElement cantAduRem = containerAdult.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_remove_button"));
 
-		System.out.println("Cantidad: " + cantAdu.getText());
+		System.out.println("Cantidad Adu: " + cantAdu.getText());
 
 		int _cantAdultos = Integer.parseInt(cantAdu.getText());
 
@@ -132,10 +136,14 @@ public class BuscarHotelPage extends BaseAppium {
 		while (_cantAdultos != this.cantAdultos && intentoClickA < 20) {
 			if (_cantAdultos < this.cantAdultos) {
 				cantAduAdd.click();
+				System.out.println("Cantidad : Add" + cantAdu.getText());
 			}
 			if (_cantAdultos > this.cantAdultos) {
 				cantAduRem.click();
+				System.out.println("Cantidad : Rem" + cantAdu.getText());
 			}
+			cantAdu = containerAdult.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
+			_cantAdultos = Integer.parseInt(cantAdu.getText());
 			intentoClickA++;
 		}
 
