@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import base.BaseAppium;
 import io.appium.java_client.AppiumBy;
-import utils.UtilDate;
+import utils.Utility;
 import utils.UtilDelay;
 import utils.UtilDriver;
 
@@ -85,8 +85,8 @@ public class BuscarHotelPage extends BaseAppium {
 	public void seleccionaFechas() {
 		String iF = "dd/MM/yyyy";
 		String sF = "dd MMMM yyyy";
-		String checkin = UtilDate.changeFormat(this.fecIngreso, iF, sF);
-		String checkout = UtilDate.changeFormat(this.fecSalida, iF, sF);
+		String checkin = Utility.dateChangeFormat(this.fecIngreso, iF, sF);
+		String checkout = Utility.dateChangeFormat(this.fecSalida, iF, sF);
 		// Action
 		UtilDriver.waitUntilVisible("com.booking:id/calendar_month_list", 5);
 		

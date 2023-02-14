@@ -9,6 +9,7 @@ public class ReservaDTO {
 	public Integer cantidadAdultos;
 	public Integer cantidadHabitaciones;
 	public List<Integer> cantidadNinosEdad;
+	public Double costoPrevio;
 	public Double costoTotal;
 		
 	public ReservaDTO(String destino, String fechaIngreso, String fechaSalida, Integer cantidadAdultos,
@@ -67,5 +68,12 @@ public class ReservaDTO {
 
 	public void setCostoTotal(Double costoTotal) {
 		this.costoTotal = costoTotal;
+	}
+	public Double getCostoPrevio() {
+		return costoPrevio;
+	}
+
+	public void setCostoPrevio(Double costoPrevio) {
+		this.costoPrevio = costoPrevio;
 	}
 }

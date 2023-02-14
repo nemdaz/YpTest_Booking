@@ -21,3 +21,17 @@ Feature: Realizar reserva de habitación en Booking.com.
   	And podemos seleccionar la habitación 1 de la lista para Información
   	And en la Información de la habitación se muestra el mismo precio de lista
   	And la sección Reserva muestra el mismo precio que en la Información.
+  	
+  Scenario: Reservar y pagar
+  	Given Previamente se verifico el detalle de la habitación, presionamos boton "Reserva ahora"
+  	When se muestra la interfaz para ingresar nuestros datos
+  	And Ingresamos nuestros datos:
+  		|Juan|
+  		|Cardenas|
+  		|jcard@test.info|
+  		|Perú|
+  		|987654321|
+  	And Se habilita el boton "Siguiente paso"
+  	Then 
+  	And 
+  	
