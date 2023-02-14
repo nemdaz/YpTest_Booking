@@ -3,7 +3,7 @@ Feature: Realizar reserva de habitación en Booking.com.
 
   Scenario: Buscamos hotel y reservamos habitacion con pago con targeta en la APP.
     Given Iniciamos la aplicación en la patalla de búsqueda.
-    When ingresamos el pais o region ("Cusco") donde hospedarnos.
+    When ingresamos el pais o region - "Cusco" - donde hospedarnos.
     And que disponga de 1 habitacion para 2 adultos
     And que permita niños:
     	| Edad de niños |
