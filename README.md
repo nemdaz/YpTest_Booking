@@ -19,7 +19,7 @@
 
 ###### Anexo 1
 
-Aplicación móvil de  Booking.com ([Archivo APK](https://drive.google.com/file/d/1ruY_5qcqWlsE3- W3rgXpFyyMiO59wFUc/view?usp=sharing)).
+Aplicación móvil de Booking.com ([Archivo APK](https://drive.google.com/file/d/1ruY_5qcqWlsE3-W3rgXpFyyMiO59wFUc/view?usp=sharing)).
 
 # SOLUCIÓN
 

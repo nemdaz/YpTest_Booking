@@ -5,7 +5,6 @@ public class UtilDelay {
 
 		try {
 			Thread.sleep(miliSec);
-
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
