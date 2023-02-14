@@ -31,7 +31,13 @@ Feature: Realizar reserva de habitación en Booking.com.
   		|jcard@test.info|
   		|Perú|
   		|987654321|
-  	And Se habilita el boton "Siguiente paso"
-  	Then 
-  	And 
+  	And Se habilita el boton "Siguiente paso", continuamos
+  	And comprobamos el resumen de la reserva
+  	And presionamos el boton "Último paso"
+  	Then se nos pide ingresar los datos de pago/tarjeta:
+  		|4555788765443333|
+  		|Maria Rosa Garcia Garcia|
+  		|02/25|
+  		|000|
+  	And al reservar con "Reservar ahora" nos confirma la reserva
   	
