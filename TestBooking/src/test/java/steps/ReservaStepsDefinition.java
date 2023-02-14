@@ -9,6 +9,8 @@ import utils.UtilDelay;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import base.BaseAppium;
 
 public class ReservaStepsDefinition implements En {
@@ -43,15 +45,14 @@ public class ReservaStepsDefinition implements En {
 			buscarHotelPage.seleccionaCantidades();
 		});
 		
-		And("que permita niños:", (DataTable tNinos) -> {
-			//assertEquals(tNinos.column(0), asList("5"));
-			// Write code here that turns the phrase above into concrete actions
-		    throw new io.cucumber.java8.PendingException();
+		And("que permita niño de edad:", (DataTable tNinos) -> {
+			BuscarHotelPage buscarHotelPage = new BuscarHotelPage(tNinos.asList(Integer.class));
+			buscarHotelPage.seleccionaCantidadNinos();
 		});
 		
-		And("hacemos click en el boton \"{string}\"", (String btnBuscar) -> {
-			// Write code here that turns the phrase above into concrete actions
-		    throw new io.cucumber.java8.PendingException();
+		And("hacemos click en el boton {string}", (String btnBuscar) -> {
+			BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
+			buscarHotelPage.buscamosHoteles();
 		});
 		
 		Then("se muestra la lista de hoteles que cumplen nuestros criterios", () -> {

@@ -50,6 +50,15 @@ public class BuscarHotelPage extends BaseAppium {
 		this.cantHabitacion = cantHabitacion;
 		this.cantAdultos = cantAdultos;
 	}
+	
+	public BuscarHotelPage(List<Integer> ninosEdad) {
+		super();
+		this.ninosEdad = ninosEdad;
+	}
+	
+	public BuscarHotelPage() {
+		super();
+	}
 
 	public void ingresaDestino() {
 		// Wait
@@ -147,6 +156,73 @@ public class BuscarHotelPage extends BaseAppium {
 			intentoClickA++;
 		}
 
+	}
+	
+	public void seleccionaCantidadNinos() {
+		// Action: Ninos
+		WebElement containerNinos = adriver.findElement(AppiumBy.id("com.booking:id/group_config_children_count"));
+		WebElement cantNinos = containerNinos.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
+		WebElement cantNinosAdd = containerNinos.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_add_button"));
+		WebElement cantNinosRem = containerNinos.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_remove_button"));
+		
+		System.out.println("Cantidad Ninos: " + cantNinos.getText());
+
+		int _cantNinos = Integer.parseInt(cantNinos.getText());
+
+		int intentoClickN = 1;
+		while (_cantNinos != this.ninosEdad.size() && intentoClickN < 20) {
+			if (_cantNinos < this.ninosEdad.size()) {
+				cantNinosAdd.click();
+				//System.out.println("Cantidad : Add" + cantNinos.getText());
+				this.seleccionaEdadNinos(this.ninosEdad.get(intentoClickN - 1));
+			}
+			if (_cantNinos > this.ninosEdad.size()) {
+				cantNinosRem.click();
+				System.out.println("Cantidad : Rem" + cantNinos.getText());
+			}
+			cantNinos = containerNinos.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
+			_cantNinos = Integer.parseInt(cantNinos.getText());
+			intentoClickN++;
+		}
+		
+		// APLICAR CANTIDADES
+		UtilDelay.coolDelay(2000);
+		WebElement aplicarCantidades = adriver.findElement(AppiumBy.id("com.booking:id/group_config_apply_button"));
+		aplicarCantidades.click();
+		
+	}
+	
+	public void seleccionaEdadNinos(int edad) {
+		
+		UtilDriver.waitUntilVisible("com.booking:id/age_picker_view", 5);
+		WebElement agePanel = adriver.findElement(AppiumBy.id("android:id/parentPanel"));
+		WebElement ageSelected = agePanel.findElement(AppiumBy.id("android:id/numberpicker_input"));
+		WebElement ageDown = agePanel.findElement(AppiumBy.xpath("//android.widget.Button[2]"));
+		WebElement ageOK = agePanel.findElement(AppiumBy.id("android:id/button1"));
+		WebElement ageNO = agePanel.findElement(AppiumBy.id("android:id/button2"));
+		
+		int maxIntent = 1;
+		while(!ageSelected.getText().contains(String.valueOf(edad)) && maxIntent < 20) {
+			System.out.println("Se selecciona una edad ...");
+			ageDown.click();
+			ageSelected = agePanel.findElement(AppiumBy.id("android:id/numberpicker_input"));
+			maxIntent++;
+			
+		}
+		
+		if(ageSelected.getText().contains(String.valueOf(edad))) {
+			ageOK.click();
+			System.out.println("Edad OK");
+		} else {
+			ageNO.click();
+			System.out.println("Edad CANCEL");
+		}
+	}
+	
+	public void buscamosHoteles() {
+		WebElement btnBuscar = adriver.findElement(AppiumBy.id("com.booking:id/facet_search_box_cta"));
+		btnBuscar.click();
+		UtilDelay.coolDelay(10 * 1000);
 	}
 
 }
