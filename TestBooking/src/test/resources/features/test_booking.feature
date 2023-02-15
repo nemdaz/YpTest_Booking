@@ -4,7 +4,7 @@ Feature: Realizar reserva de habitación en Booking.com.
   Scenario: Buscamos hotel.
     Given Iniciamos la aplicación en la patalla de búsqueda.
     When ingresamos el pais o region - "Cusco" - donde hospedarnos.
-    And para el rango de fechas "22/02/2023" y "28/02/2023" 
+    And para el rango de fechas "15/02/2023" y "28/02/2023" 
     And que disponga de 1 habitacion para 2 adultos
     And que permita niño de edad:
     	| 5 |

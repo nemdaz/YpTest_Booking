@@ -10,7 +10,7 @@ import base.BaseAppium;
 import io.appium.java_client.AppiumBy;
 import utils.UtilDelay;
 
-public class ListaHotelesPage extends BaseAppium{
+public class ListaHotelesPage extends BaseAppium {
 	public int seleccionaPos;
 	public int cantNoHoteles;
 	
@@ -46,7 +46,7 @@ public class ListaHotelesPage extends BaseAppium{
 	
 	public void seleccionaHotel() {
 		
-		this.listaResultadoHoteles(); // Recalculated this.cantNoHoteles
+		//this.listaResultadoHoteles(); // Recalculated this.cantNoHoteles
 		
 		WebElement containerResultados = adriver.findElement(AppiumBy.id("com.booking:id/results_list_facet")); //FrameLayout
 		List<WebElement> listaHoteles = containerResultados.findElements(AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup"));

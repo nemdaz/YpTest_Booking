@@ -17,14 +17,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import base.BaseAppium;
+import base.Contexto;
 import dto.ReservaDTO;
 
 public class ReservaStepsDefinition implements En {
 	
 	final BaseAppium apiumBase = new BaseAppium();
-	final ReservaDTO reservaObj = new ReservaDTO();
 	final BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
-	final ListaHotelesPage listaHoteles = new ListaHotelesPage();
 	final EscogeHabitacionPage escogeHabitacionPage = new EscogeHabitacionPage();
 	final ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
 	final TerminaReservaPage reservaFinPage = new TerminaReservaPage();
@@ -43,7 +42,7 @@ public class ReservaStepsDefinition implements En {
 		When("ingresamos el pais o region - {string} - donde hospedarnos.", (String destino) -> {
 			UtilDelay.coolDelay(2 * 1000);
 			
-			reservaObj.setDestino(destino);
+			Contexto.reservaObj.setDestino(destino);
 			buscarHotelPage.destino = destino;
 			buscarHotelPage.ingresaDestino();
 			
@@ -54,8 +53,8 @@ public class ReservaStepsDefinition implements En {
 		And("para el rango de fechas {string} y {string}", (String checkin, String checkout) -> {
 			UtilDelay.coolDelay(1 * 1000);
 			
-			reservaObj.setFechaIngreso(checkin);
-			reservaObj.setFechaSalida(checkout);
+			Contexto.reservaObj.setFechaIngreso(checkin);
+			Contexto.reservaObj.setFechaSalida(checkout);
 			
 			buscarHotelPage.fecIngreso = checkin;
 			buscarHotelPage.fecSalida = checkout;
@@ -65,8 +64,8 @@ public class ReservaStepsDefinition implements En {
 		And("que disponga de {int} habitacion para {int} adultos", (Integer cantHabitacion, Integer cantAdultos) -> {
 			UtilDelay.coolDelay(1 * 1000);
 			
-			reservaObj.setCantidadAdultos(cantAdultos);
-			reservaObj.setCantidadHabitaciones(cantHabitacion);
+			Contexto.reservaObj.setCantidadAdultos(cantAdultos);
+			Contexto.reservaObj.setCantidadHabitaciones(cantHabitacion);
 			
 			buscarHotelPage.cantHabitacion = cantHabitacion;
 			buscarHotelPage.cantAdultos = cantAdultos;
@@ -74,7 +73,7 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		And("que permita niño de edad:", (DataTable tNinos) -> {
-			reservaObj.setCantidadNinosEdad(tNinos.asList(Integer.class));
+			Contexto.reservaObj.setCantidadNinosEdad(tNinos.asList(Integer.class));
 			
 			buscarHotelPage.ninosEdad = tNinos.asList(Integer.class);
 			buscarHotelPage.seleccionaCantidadNinos();
@@ -89,8 +88,8 @@ public class ReservaStepsDefinition implements En {
 		Then("se muestra la lista de hoteles con al menos {int} resultados cumplen los criterios.", (Integer minCant) -> {
 			UtilDelay.coolDelay(2 * 1000);
 			
-			List<String> resultado = listaHoteles.listaResultadoHoteles();
-			System.out.println("Valor de no hoteles: " + listaHoteles.cantNoHoteles);
+			List<String> resultado = Contexto.listaHoteles.listaResultadoHoteles();
+			System.out.println("Valor de no hoteles: " + Contexto.listaHoteles.cantNoHoteles);
 			assertTrue( minCant <= resultado.size());
 		});
 		
@@ -98,22 +97,22 @@ public class ReservaStepsDefinition implements En {
 		Given("Estamos en la lista de resulado, seleccionamos el resultado {int} de la lista.", (Integer position)->{
 			UtilDelay.coolDelay(2 * 1000);
 			
-			System.out.println("Valor de no hoteles (GIVEN): " + listaHoteles.cantNoHoteles);
-			listaHoteles.seleccionaPos = position;
-			listaHoteles.seleccionaHotel();
+			System.out.println("Valor de no hoteles (GIVEN): " + Contexto.listaHoteles.cantNoHoteles);
+			Contexto.listaHoteles.seleccionaPos = position;
+			Contexto.listaHoteles.seleccionaHotel();
 		});
 		
 		When("nos muestra el detalle del hotel", ()->{
 			UtilDelay.coolDelay(1 * 1000);
 			
-			boolean vistaOk = listaHoteles.muestraDetalleHotel();
+			boolean vistaOk = Contexto.listaHoteles.muestraDetalleHotel();
 			assertTrue(vistaOk);
 		});
 		
 		And("seleccionamos alguno de los botones para ver las habitaciones, botones:", (DataTable posibleBotones)->{
 			UtilDelay.coolDelay(1 * 1000);
 			
-			listaHoteles.muestraHabitacionesHotel(posibleBotones.asList());
+			Contexto.listaHoteles.muestraHabitacionesHotel(posibleBotones.asList());
 		});
 		
 		Then("se muestra las habitaciones disponibles y sus precios", ()->{
@@ -125,26 +124,27 @@ public class ReservaStepsDefinition implements En {
 		And("podemos seleccionar la habitación {int} de la lista para Información", (Integer position)->{
 			UtilDelay.coolDelay(2 * 1000);
 			escogeHabitacionPage.posicionHabitacion = position;
-			reservaObj.setCostoPrevio(escogeHabitacionPage.seleccionaHabitacion());
+			Contexto.reservaObj.setCostoPrevio(escogeHabitacionPage.seleccionaHabitacion());
 		});
 		
 		And("en la Información de la habitación se muestra el mismo precio de lista", ()->{
 			UtilDelay.coolDelay(5 * 1000);
 			Double p = escogeHabitacionPage.muestraInformacionHabitacion();
-			assertEquals(reservaObj.getCostoPrevio(), p);
-			reservaObj.setCostoPrevio(p);
+			assertEquals(Contexto.reservaObj.getCostoPrevio(), p);
+			Contexto.reservaObj.setCostoPrevio(p);
 		});
 		
 		And("la sección Reserva muestra el mismo precio que en la Información.", ()->{
 			UtilDelay.coolDelay(1 * 1000);
 			Double p = escogeHabitacionPage.muestraInformacionReserva();
-			assertEquals(reservaObj.getCostoPrevio(), p);
-			reservaObj.setCostoPrevio(p);
+			assertEquals(Contexto.reservaObj.getCostoPrevio(), p);
+			Contexto.reservaObj.setCostoPrevio(p);
 		});
 		
 		// SCENARIO
 		Given("Previamente se verifico el detalle de la habitación, presionamos boton {string}", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
+			System.out.println("Costo previo (GIVEN) : " + Contexto.reservaObj.getCostoPrevio());
 			reservaPage.iniciamosReserva(btnTexto);
 		});
 		
@@ -158,7 +158,12 @@ public class ReservaStepsDefinition implements En {
 			reservaPage.cliPaisRegion = datos.get(3);
 			reservaPage.cliNumTelf = datos.get(4);
 			reservaPage.cliProposito = datos.get(5);
+			
 			reservaPage.ingresamosDatosReserva();
+			
+			Double precioActual = reservaPage.muestraInformacionReserva();
+			assertEquals(Contexto.reservaObj.costoPrevio, precioActual);
+			Contexto.reservaObj.setCostoPrevio(precioActual);
 			
 		});
 		

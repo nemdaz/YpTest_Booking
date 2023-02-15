@@ -11,6 +11,7 @@ import base.BaseAppium;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import utils.Utility;
 
 public class ReservaHabitacionPage extends BaseAppium {
 
@@ -108,6 +109,20 @@ public class ReservaHabitacionPage extends BaseAppium {
 			}
 		}		
 		
+	}
+	
+	public Double muestraInformacionReserva() {
+		
+		WebElement nodeReserva = adriver.findElement(AppiumBy.id("com.booking:id/informative_click_to_action_container"));
+		WebElement priceHab = nodeReserva.findElement(AppiumBy.id("com.booking:id/title"));
+		
+		String strPrice = priceHab.getText();
+		Double dPrice = Utility.numbersFromString(strPrice).get(1);
+		
+		System.out.printf("Reserva Hab. RSV : Precio en Text: %s\n", strPrice);
+		System.out.printf("Reserva Hab. RSV : Precio en Doub: %s\n", dPrice.toString());	
+		
+		return dPrice;
 	}
 	
 	public void comprobamosDetalleReserva(String btnTexto) {
