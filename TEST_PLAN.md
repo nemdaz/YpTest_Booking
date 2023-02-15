@@ -61,11 +61,9 @@ El plan de pruebas se enmarca al modulo 010100 del sistema Booking la cual corre
 | Software | SourceTree 3.4.8               | Gestor de control de versiones git.                                                                                                    |
 | Software | Git                            | Herramienta de controlde versiones.                                                                                                    |
 | Servicio | GitHub                         | Repositorio en la nube para el control de versiones git.                                                                              |
-| Software | Jenkins v2.375.3 LTS           | Herramienta para la intergracion continua                                                                                              |
 | Software | NodeJS v18.14.0                | Necesario para instalar Appium v2 y su driver.                                                                                         |
 | Software | Android SDK Tools              | Herramientas de android (Google).                                                                                                      |
 | Software | scrcpy                         | Visor de pantalla de Android en Windows                                                                                                |
-| Software | jenkins-cli                    | Cliente de linea de comandos de Jenkins                                                                                                |
 | Software | appium v2                      | Appium es un Framework de automatización de pruebas de código abierto para usar con aplicaciones web nativas, híbridas y móviles. |
 | Software | uiautomator2                   | Driver necesario para la conección entre Appium y el dispositivo                                                                      |
 | Software | appium-inspector               | Aplicativo desktop para inspeccionar apps/apk en el proceso de pruebas.                                                                |
@@ -137,22 +135,6 @@ De acuerdo a lo indicado en el punto "4. Entorno de Pruebas" se realiza la confi
   appium driver install uiautomator2
   ```
 
-**Jenkins**
-
-- Con el archivo war descargado, crear una ruta de instalacion manual para Jenkins, como por Ejm: *D:\Workspace\Jenkins* y en ella colocar el archivo war.
-- Crear una archivo de configuracion (`runJenkins.bat`) de inicio de Jenkins.
-
-  ```
-  set JENKINS_HOME=local-jenkins-config
-  java -Dfile.encoding=UTF-8 -jar jenkins.war --httpPort=9090
-  ```
-
-  Ejecutar *`runJenkins.bat`* para inciar Jenkins en la ruta: *localhost:9090*
-- Al ejecutar Jenkins por primera vez dejar la configuracion por defecto y establecer el usuario y clave.
-- Al ingresar al panel de control de Jenkins por primera vez, instalar el plugin NodeJS, reiniciar Jenkins.
-- Volvemos a ingresar a Jenkins en la opcion *"Panel de Control / Administrar Jenkins / Global Tool Configuration"* y ubicamos la sección NodeJS, en ella pulsamos en *"Añadir NodeJS"*, colocamos un nombre (Ejm. My Local NodeJS), quitamos el check *"Instalar automaticamente"* y finalmente ingresamos nuestro directorio de instalacion de NodeJS (Ejm: `D:\Program Files\nodejs`). Guardamos los cambios y salimos.
-- *NOTA:* Si queremos programar un cron en Jenkins tomar como referecia esta herramienta: *https://crontab.cronhub.io/*
-
 **Otras configuraciones**
 
 - Establecemos las variables de entorno para Maven y Java. Los valores de las variables son referenciales ya que pueden variar segun los criterios o configuraciones personalizadas de Tester/Probador.
@@ -163,7 +145,7 @@ De acuerdo a lo indicado en el punto "4. Entorno de Pruebas" se realiza la confi
   M2_HOME = D:\Program Files\apache-maven-3.8.3
   ```
 
-### 6. Estrategías de Pruebas !!
+### 6. Estrategías de Pruebas
 
 Para el cumplimiento de los objetivos se plantean estrategías de pruebas las cuales estarán en funcion a los siguientes tipos, niveles y técnicas de pruebas.
 
@@ -172,34 +154,29 @@ Para el cumplimiento de los objetivos se plantean estrategías de pruebas las cu
 | Prueba Funcional    | Prueba de componentes | Pruebas de equivalencia y valores limites.<br />Pruebas de humo/exploratorias. |
 | Prueba No Funcional | Prueba de componentes | Pruebas de humo/exploratorias.                                                 |
 
-###### Actividades estratégicas: !!
+###### Actividades estratégicas:
 
-- Identificar
-- Considerando
+- Identificar la estructura DOM del componente APK usando herramientas para este fin.
+- Desarrollar las pruebas usando el patron POM (Page Object Model).
+- Realizar las definiciones de las pruebas usando la filosofía Cucumber y diseñar las pruebas usando Gherkin.
 
-### 7. Escenario de Pruebas !!
+### 7. Escenario de Pruebas
 
 Dado las funcionalidades definidas para el sistema objeto (Ver punto 1 en "Documentos relacionados") de este plan de pruebas se debe abordar los escenarios de pruebas:
 
-a) Comprobacion de disponibilidad del sistema (API).
+a) Realizar la búsqueda de hoteles.
 
-b) Generacion de Token válido.
+b) Escoger el hotel y la habitacion.
+
+c) Reservar la habitacion.
 
 ### 8. Diseño de Pruebas
 
 Haciendo uso de el o los documentos de definicion del sistema y en concordancia con los escenarios de pruebas contemplados a efecto de este plan de pruebas, se constuye los casos de pruebas.
 
-Los casos de pruebas son de tipo funcional y no funcional siendo asi que deben cumplir con:
+Los casos de pruebas son de tipo funcional y serán diseñadas usando Cucumber/Gherkin:
 
-- Prefijo y nombre de caso de prueba.
-- Pre-requisitos y requisitos del caso de prueba.
-- Datos de entrada para el caso de prueba.
-- Detalle del caso de prueba.
-- Resultado esperado del caso de prueba.
-- Los casos de prueba pueden incluir los pasos de prueba.
-- Los pasos de prueba tiene datos de entrada (incluidos en los datos de entrada de la prueba).
-- Cada paso de prueba tiene un orden y resultado esperado.
-- La ejecución satisfactoria de todos los pasos de la prueba hace cumplir el resultado esperado general de la prueba.
+- Visualizar el proyecto y ubicar las definiciones en la ruta `src/test/resources/features/`
 
 ### 9. Criterios de Aceptación
 
