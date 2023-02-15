@@ -47,28 +47,28 @@ El plan de pruebas se enmarca al modulo 010100 del sistema Booking la cual corre
 
 ##### Ambiente de Pruebas
 
-| Tipo               | Nombre        | Detalle                                                            |
-| :----------------- | :------------ | :----------------------------------------------------------------- |
-| Dispositivo Laptop | Lenovo Yoga 7 | Ryzen 7 Serie 4000,<br />16GB RAM, 500GB SSD, <br />Windows 11 HSL |
-| API                | Booker API    | URL Base: https://restful-booker.herokuapp.com                     |
+| Tipo               | Nombre               | Detalle                                                                                                                                                               |
+| :----------------- | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dispositivo Laptop | Lenovo Yoga 7        | Ryzen 7 Serie 4000,<br />16GB RAM, 500GB SSD, <br />Windows 11 HSL                                                                                                    |
+| App Android (APK)  | booking-com-32-9.apk | [https://drive.google.com/file/d/1ruY_5qcqWlsE3-W3rgXpFyyMiO59wFUc/view?usp=sharing](https://drive.google.com/file/d/1ruY_5qcqWlsE3-W3rgXpFyyMiO59wFUc/view?usp=sharing) |
 
 ##### Herramientas
 
-| Tipo     | Nombre                         | Detalle                                                                                                                                |
-| :------- | :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| Software | VSCode v1.75.0                 | Editor/IDE.                                                                                                                            |
-| Software | Eclipse IDE 2022-12            | Java IDE                                                                                                                               |
-| Software | SourceTree 3.4.8               | Gestor de control de versiones git.                                                                                                    |
-| Software | Git                            | Herramienta de controlde versiones.                                                                                                    |
-| Servicio | GitHub                         | Repositorio en la nube para el control de versiones git.                                                                              |
-| Software | NodeJS v18.14.0                | Necesario para instalar Appium v2 y su driver.                                                                                         |
-| Software | Android SDK Tools              | Herramientas de android (Google).                                                                                                      |
-| Software | scrcpy                         | Visor de pantalla de Android en Windows                                                                                                |
-| Software | appium v2                      | Appium es un Framework de automatización de pruebas de código abierto para usar con aplicaciones web nativas, híbridas y móviles. |
-| Software | uiautomator2                   | Driver necesario para la conección entre Appium y el dispositivo                                                                      |
-| Software | appium-inspector               | Aplicativo desktop para inspeccionar apps/apk en el proceso de pruebas.                                                                |
-| Software | appium-doctor                  | Para verificar si cumplimos con lo requisitos para usar Appium                                                                         |
-| Hardware | Smartphone Xiaomi (Android 13) | Dispositivo de pruebas Android.                                                                                                        |
+| Tipo     | Nombre                                                         | Detalle                                                                                                                                |
+| :------- | :------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| Software | VSCode v1.75.0                                                 | Editor/IDE.                                                                                                                            |
+| Software | Eclipse IDE 2022-12                                            | Java IDE                                                                                                                               |
+| Software | SourceTree 3.4.8                                               | Gestor de control de versiones git.                                                                                                    |
+| Software | Git                                                            | Herramienta de controlde versiones.                                                                                                    |
+| Servicio | GitHub                                                         | Repositorio en la nube para el control de versiones git.                                                                              |
+| Software | NodeJS v18.14.0                                                | Necesario para instalar Appium v2 y su driver.                                                                                         |
+| Software | Android SDK Tools                                              | Herramientas de android (Google).                                                                                                      |
+| Software | scrcpy                                                         | Visor de pantalla de Android en Windows                                                                                                |
+| Software | appium v2                                                      | Appium es un Framework de automatización de pruebas de código abierto para usar con aplicaciones web nativas, híbridas y móviles. |
+| Software | uiautomator2                                                   | Driver necesario para la conección entre Appium y el dispositivo                                                                      |
+| Software | appium-inspector                                               | Aplicativo desktop para inspeccionar apps/apk en el proceso de pruebas.                                                                |
+| Software | appium-doctor                                                  | Para verificar si cumplimos con lo requisitos para usar Appium                                                                         |
+| Hardware | Smartphone Xiaomi (Android 13)<br />Tablet Lenovo (Android 11) | Dispositivos de pruebas Android.                                                                                                       |
 
 ### 5. Configuracion del Entorno de Pruebas
 
@@ -97,11 +97,11 @@ De acuerdo a lo indicado en el punto "4. Entorno de Pruebas" se realiza la confi
 
   - La url del repositorio, creado previamente en GitHub.
   - La ruta local donde se clonará el repositorio en nuestro equipo de trabajo. Esta ruta será nuestro espacio de trabajo local para este plan de pruebas.
-- Una vez clonado el repositorio de GitHub, verificamos la creacion de nuestro espacion de trabajo, de acuerdo a configuraciones previas nuestra carpeta debe tener el nombre "YpTest_APIBooker". *Ejm: D:\Workspace\Yape\YpTest_APIBooker*
+- Una vez clonado el repositorio de GitHub, verificamos la creacion de nuestro espacion de trabajo, de acuerdo a configuraciones previas nuestra carpeta debe tener el nombre "YpTest_Booking". *Ejm: D:\Workspace\Yape\YpTest_Booking*
 
 **VSCode**
 
-- Abrimos el aplicativo, nos uicamos en la opcion *"**File - Open Folder"* y abrimos el forlder "YpTest_APIBooker" que corresponde a nuestro espacio de trabajo. Aqui trabajemos con los archivos necesarios para el plan de pruebas.
+- Abrimos el aplicativo, nos uicamos en la opcion *"File - Open Folder"* y abrimos el forlder "YpTest_Booking" que corresponde a nuestro espacio de trabajo. Aqui trabajemos con los archivos necesarios para el plan de pruebas.
 
 **Eclipse IDE**
 
