@@ -80,7 +80,6 @@ De acuerdo a lo indicado en el punto "4. Entorno de Pruebas" se realiza la confi
 - Descargar e instalar el sistema adminsitrador de control de versiones SourceTree desde la url https://www.sourcetreeapp.com/ en su version para el SO Windows.
 - Descargar e instalar el editor/ide VScode desde la url https://code.visualstudio.com/sha/download?build=stable&os=win32-x64.
 - Crear una cuenta en el servicio cloud de control de versiones https://github.com/.
-- Descargar la version war de Jenkins desde la url https://www.jenkins.io/download/.
 - Descargar e instalar NodeJs de manera global, usar la url https://nodejs.org/en/.
 - Descargar e instalar Eclipse IDE 2022-12.
 - Descargar e instalar Appium Inspector desde [https://github.com/appium/appium-inspector](https://github.com/appium/appium-inspector).
