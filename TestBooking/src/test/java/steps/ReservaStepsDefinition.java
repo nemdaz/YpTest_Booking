@@ -25,6 +25,11 @@ public class ReservaStepsDefinition implements En {
 		
 		BaseAppium apiumBase = new BaseAppium();
 		ReservaDTO reservaObj = new ReservaDTO();
+		BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
+		ListaHotelesPage listaHoteles = new ListaHotelesPage();
+		EscogeHabitacionPage escogeHabitacionPage = new EscogeHabitacionPage();
+		ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
+		TerminaReservaPage reservaFinPage = new TerminaReservaPage();
 		
 		Before(()->{
 			//apiumBase.startService();
@@ -38,7 +43,7 @@ public class ReservaStepsDefinition implements En {
 		
 		When("ingresamos el pais o region - {string} - donde hospedarnos.", (String destino) -> {
 			reservaObj.setDestino(destino);
-			BuscarHotelPage buscarHotelPage = new BuscarHotelPage(destino);
+			buscarHotelPage.destino = destino;
 			buscarHotelPage.ingresaDestino();
 			UtilDelay.coolDelay(1 * 1000);
 			buscarHotelPage.seleccionaOpcionesDestino(2);
@@ -48,7 +53,8 @@ public class ReservaStepsDefinition implements En {
 			reservaObj.setFechaIngreso(checkin);
 			reservaObj.setFechaSalida(checkout);
 			
-			BuscarHotelPage buscarHotelPage = new BuscarHotelPage(checkin, checkout);
+			buscarHotelPage.fecIngreso = checkin;
+			buscarHotelPage.fecSalida = checkout;
 			buscarHotelPage.seleccionaFechas();
 		});
 		
@@ -56,26 +62,27 @@ public class ReservaStepsDefinition implements En {
 			reservaObj.setCantidadAdultos(cantAdultos);
 			reservaObj.setCantidadHabitaciones(cantHabitacion);
 			
-			BuscarHotelPage buscarHotelPage = new BuscarHotelPage(cantHabitacion, cantAdultos);
+			buscarHotelPage.cantHabitacion = cantHabitacion;
+			buscarHotelPage.cantAdultos = cantAdultos;
 			buscarHotelPage.seleccionaCantidades();
 		});
 		
 		And("que permita niño de edad:", (DataTable tNinos) -> {
 			reservaObj.setCantidadNinosEdad(tNinos.asList(Integer.class));
 			
-			BuscarHotelPage buscarHotelPage = new BuscarHotelPage(tNinos.asList(Integer.class));
+			buscarHotelPage.ninosEdad = tNinos.asList(Integer.class);
 			buscarHotelPage.seleccionaCantidadNinos();
 		});
 		
 		And("hacemos click en el boton {string}", (String btnBuscar) -> {
 			UtilDelay.coolDelay(2 * 1000);
-			BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
+			
 			buscarHotelPage.buscamosHoteles();
 		});
 		
 		Then("se muestra la lista de hoteles con al menos {int} resultados cumplen los criterios.", (Integer minCant) -> {
 			UtilDelay.coolDelay(2 * 1000);
-			ListaHotelesPage listaHoteles = new ListaHotelesPage();
+			
 			List<String> resultado = listaHoteles.listaResultadoHoteles();
 			assertTrue( minCant <= resultado.size());
 		});
@@ -83,47 +90,46 @@ public class ReservaStepsDefinition implements En {
 		// SCENARIO
 		Given("Estamos en la lista de resulado, seleccionamos el resultado {int} de la lista.", (Integer position)->{
 			UtilDelay.coolDelay(2 * 1000);
-			ListaHotelesPage listaHoteles = new ListaHotelesPage(position);
+			
+			listaHoteles.seleccionaPos = position;
 			listaHoteles.seleccionaHotel();
 		});
 		
 		When("nos muestra el detalle del hotel", ()->{
 			UtilDelay.coolDelay(1 * 1000);
-			ListaHotelesPage listaHoteles = new ListaHotelesPage();	
+			
 			boolean vistaOk = listaHoteles.muestraDetalleHotel();
 			assertTrue(vistaOk);
 		});
 		
 		And("seleccionamos alguno de los botones para ver las habitaciones, botones:", (DataTable posibleBotones)->{
-			ListaHotelesPage listaHoteles = new ListaHotelesPage();
+			UtilDelay.coolDelay(1 * 1000);
+			
 			listaHoteles.muestraHabitacionesHotel(posibleBotones.asList());
 		});
 		
 		Then("se muestra las habitaciones disponibles y sus precios", ()->{
 			UtilDelay.coolDelay(2 * 1000);
-			EscogeHabitacionPage ehab = new EscogeHabitacionPage();
-			boolean muestra = ehab.muestraHabitaciones();
+			boolean muestra = escogeHabitacionPage.muestraHabitaciones();
 			assertTrue(muestra);
 		});
 		
 		And("podemos seleccionar la habitación {int} de la lista para Información", (Integer position)->{
 			UtilDelay.coolDelay(2 * 1000);
-			EscogeHabitacionPage ehab = new EscogeHabitacionPage(position);
-			reservaObj.setCostoPrevio(ehab.seleccionaHabitacion());
+			escogeHabitacionPage.posicionHabitacion = position;
+			reservaObj.setCostoPrevio(escogeHabitacionPage.seleccionaHabitacion());
 		});
 		
 		And("en la Información de la habitación se muestra el mismo precio de lista", ()->{
 			UtilDelay.coolDelay(5 * 1000);
-			EscogeHabitacionPage ehab = new EscogeHabitacionPage();
-			Double p = ehab.muestraInformacionHabitacion();
+			Double p = escogeHabitacionPage.muestraInformacionHabitacion();
 			assertEquals(reservaObj.getCostoPrevio(), p);
 			reservaObj.setCostoPrevio(p);
 		});
 		
 		And("la sección Reserva muestra el mismo precio que en la Información.", ()->{
 			UtilDelay.coolDelay(1 * 1000);
-			EscogeHabitacionPage ehab = new EscogeHabitacionPage();
-			Double p = ehab.muestraInformacionReserva();
+			Double p = escogeHabitacionPage.muestraInformacionReserva();
 			assertEquals(reservaObj.getCostoPrevio(), p);
 			reservaObj.setCostoPrevio(p);
 		});
@@ -131,54 +137,50 @@ public class ReservaStepsDefinition implements En {
 		// SCENARIO
 		Given("Previamente se verifico el detalle de la habitación, presionamos boton {string}", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
-			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
 			reservaPage.iniciamosReserva(btnTexto);
 		});
 		
 		When("Ingresamos nuestros datos en el formulario:", (DataTable datosReserva)->{
 			UtilDelay.coolDelay(5 * 1000);
+			
 			List<String> datos = datosReserva.asList();
-			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage(
-					datos.get(0),
-					datos.get(1),
-					datos.get(2),
-					datos.get(3),
-					datos.get(4),
-					datos.get(5)
-					);
+			reservaPage.cliNombres = datos.get(0);
+			reservaPage.cliApellidos = datos.get(1);
+			reservaPage.cliCorreoE = datos.get(2);
+			reservaPage.cliPaisRegion = datos.get(3);
+			reservaPage.cliNumTelf = datos.get(4);
+			reservaPage.cliProposito = datos.get(5);
 			reservaPage.ingresamosDatosReserva();
 			
 		});
 		
 		And("Se habilita el boton {string}, continuamos", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
-			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
+
 			reservaPage.comprobamosDetalleReserva(btnTexto);
 		});
 		
 		And("comprobamos el resumen de la reserva y presionamos el boton {string}", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
-			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
+			
 			reservaPage.comprobamosResumenReserva(btnTexto);
 		});
 		
 		Then("se nos pide ingresar los datos de tarjeta:", (DataTable datosTarjeta)->{
 			UtilDelay.coolDelay(4 * 1000);
-			List<String> datCard = datosTarjeta.asList(); 
-			TerminaReservaPage reservaFinPage = new TerminaReservaPage(
-					datCard.get(0),
-					datCard.get(1),
-					datCard.get(2),
-					datCard.get(3)
-					);
+			
+			List<String> datCard = datosTarjeta.asList();
+			reservaFinPage.cardNumber = datCard.get(0);
+			reservaFinPage.cardPropietario = datCard.get(1);
+			reservaFinPage.cardExpira = datCard.get(2);
+			reservaFinPage.cardCVC = datCard.get(3);
+			
 			reservaFinPage.ingresamosDatosTarjeta();
 		});
 		
 		And("al reservar con {string} nos confirma la reserva", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
-			//Verificamos montos
-			TerminaReservaPage reservaFinPage = new TerminaReservaPage();
-			
+			//Verificamos montos			
 			
 		});
 		
