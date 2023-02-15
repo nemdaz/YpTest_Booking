@@ -73,6 +73,7 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		And("que permita niño de edad:", (DataTable tNinos) -> {
+			UtilDelay.coolDelay(2 * 1000);
 			Contexto.reservaObj.setCantidadNinosEdad(tNinos.asList(Integer.class));
 			
 			buscarHotelPage.ninosEdad = tNinos.asList(Integer.class);

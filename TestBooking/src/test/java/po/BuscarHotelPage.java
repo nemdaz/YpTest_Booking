@@ -111,6 +111,7 @@ public class BuscarHotelPage extends BaseAppium {
 		desLbl.click();
 
 		// Action: Habitacion
+		UtilDelay.coolDelay(1*1000);
 		WebElement containerHab = adriver.findElement(AppiumBy.id("com.booking:id/group_config_rooms_count"));
 		WebElement cantHab = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
 		WebElement cantHabAdd = containerHab.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_add_button"));
@@ -183,6 +184,7 @@ public class BuscarHotelPage extends BaseAppium {
 				cantNinosRem.click();
 				System.out.println("Cantidad : Rem" + cantNinos.getText());
 			}
+			containerNinos = adriver.findElement(AppiumBy.id("com.booking:id/group_config_children_count"));
 			cantNinos = containerNinos.findElement(AppiumBy.id("com.booking:id/bui_input_stepper_value"));
 			_cantNinos = Integer.parseInt(cantNinos.getText());
 			intentoClickN++;

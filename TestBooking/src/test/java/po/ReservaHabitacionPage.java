@@ -117,7 +117,11 @@ public class ReservaHabitacionPage extends BaseAppium {
 		WebElement priceHab = nodeReserva.findElement(AppiumBy.id("com.booking:id/title"));
 		
 		String strPrice = priceHab.getText();
-		Double dPrice = Utility.numbersFromString(strPrice).get(1);
+		List<Double> nums = Utility.numbersFromString(strPrice);
+		Double dPrice = Utility.numbersFromString(strPrice).get(0);
+		if(nums.size() > 1) {
+			dPrice = Utility.numbersFromString(strPrice).get(1);
+		}
 		
 		System.out.printf("Reserva Hab. RSV : Precio en Text: %s\n", strPrice);
 		System.out.printf("Reserva Hab. RSV : Precio en Doub: %s\n", dPrice.toString());	
