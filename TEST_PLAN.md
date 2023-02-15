@@ -188,8 +188,8 @@ El proyecto es aprobado si se satisface los siguientes criterios de aceptación:
 
 ### 10. Entregables de Pruebas
 
-| Tipo de Prueba      | Tipo de Ejecución | Entregable | Descripción |
-| :------------------ | :----------------- | :--------- | :----------- |
-| Pruebas Funcionales | Automatizada       |            |              |
+| Tipo de Prueba      | Tipo de Ejecución | Entregable              | Descripción |
+| :------------------ | :----------------- | :---------------------- | :----------- |
+| Pruebas Funcionales | Automatizada       | Proyecto JAVA (Eclipse) |              |
 
 END
