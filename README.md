@@ -28,7 +28,7 @@ Aplicación móvil de Booking.com ([Archivo APK](https://drive.google.com/file/d
 ###### 1. Plan de Pruebas
 
 - El archivo ***[Plan de Pruebas](./TEST_PLAN.md)*** es:[TEST_PLAN.md](./TEST_PLAN.md).
-- El archivo ***[Casos de Pruebas](./`TestBooking/src/test/resources/features/test_booking.feature`)*** basado en Cucumber está en: `TestBooking\src\test\resources\features\test_booking.feature`
+- El archivo ***[Casos de Pruebas](./TestBooking/src/test/resources/features/test_booking.feature)*** basado en Cucumber está en: `TestBooking\src\test\resources\features\test_booking.feature`
 
 ###### 2. Código y cobertura
 
