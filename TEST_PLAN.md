@@ -31,7 +31,7 @@
 
 ### 2. Objetivo
 
-La finalidad del presente documento es definir las pautas y estrategias que nos permitiran cumplir con la certificacion de calidad del componente 010100 del sistema Booker.
+La finalidad del presente documento es definir las pautas y estrategias que nos permitiran cumplir con la certificacion de calidad del aplicativo móvil 010100 del sistema Booking.
 
 El objetivo general es definir las condiciones que nos permitan ejecutar las pruebas y en consecuencia nos entregue un sistema que cumpla con las funcionalidades requeridas por todos los interesados.
 
@@ -188,8 +188,9 @@ El proyecto es aprobado si se satisface los siguientes criterios de aceptación:
 
 ### 10. Entregables de Pruebas
 
-| Tipo de Prueba      | Tipo de Ejecución | Entregable              | Descripción |
-| :------------------ | :----------------- | :---------------------- | :----------- |
-| Pruebas Funcionales | Automatizada       | Proyecto JAVA (Eclipse) |              |
+| Tipo de Prueba      | Tipo de Ejecución | Entregable                                 | Descripción                                                                                                                                                                                                 |
+| :------------------ | :----------------- | :----------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pruebas Funcionales | Automatizada       | Proyecto JAVA (Eclipse)                    | Todo el código de la automatización, haciendo uso de Gjerkin, Java y otros.                                                                                                                                |
+| N/A                 | N/A                | TestBooking.appium_inspector.appiumsession | Archivo de entrada para Appium Inspector.<br />Cambiar el identificador `appium:udid` por el del dispositivo en uso. <br />Usar el comando `adb devices` para ver el id de los dispositivos conectados. |
 
 END
