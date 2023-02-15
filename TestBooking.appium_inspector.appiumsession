@@ -9,7 +9,7 @@
     {
       "type": "text",
       "name": "appium:udid",
-      "value": "a58c4cdf"
+      "value": "HA1M6XDH"
     },
     {
       "type": "text",
@@ -35,6 +35,11 @@
       "type": "text",
       "name": "appium:appActivity",
       "value": "com.booking.appindex.presentation.activity.SearchActivity"
+    },
+    {
+      "type": "boolean",
+      "name": "appium:autoGrantPermissions",
+      "value": false
     }
   ],
   "server": {

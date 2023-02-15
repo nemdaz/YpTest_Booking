@@ -5,6 +5,7 @@ import io.cucumber.java8.En;
 import po.BuscarHotelPage;
 import po.EscogeHabitacionPage;
 import po.ListaHotelesPage;
+import po.ReservaHabitacionPage;
 import utils.Utility;
 import utils.UtilDelay;
 
@@ -38,7 +39,7 @@ public class ReservaStepsDefinition implements En {
 			reservaObj.setDestino(destino);
 			BuscarHotelPage buscarHotelPage = new BuscarHotelPage(destino);
 			buscarHotelPage.ingresaDestino();
-			UtilDelay.coolDelay(2);
+			UtilDelay.coolDelay(1 * 1000);
 			buscarHotelPage.seleccionaOpcionesDestino(2);
 		});
 		
@@ -84,6 +85,7 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		When("nos muestra el detalle del hotel", ()->{
+			UtilDelay.coolDelay(1 * 1000);
 			ListaHotelesPage listaHoteles = new ListaHotelesPage();	
 			boolean vistaOk = listaHoteles.muestraDetalleHotel();
 			assertTrue(vistaOk);
@@ -108,7 +110,7 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		And("en la Información de la habitación se muestra el mismo precio de lista", ()->{
-			UtilDelay.coolDelay(2 * 1000);
+			UtilDelay.coolDelay(5 * 1000);
 			EscogeHabitacionPage ehab = new EscogeHabitacionPage();
 			Double p = ehab.muestraInformacionHabitacion();
 			assertEquals(reservaObj.getCostoPrevio(), p);
@@ -124,6 +126,47 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		// SCENARIO
+		Given("Previamente se verifico el detalle de la habitación, presionamos boton {string}", (String btnTexto)->{
+			UtilDelay.coolDelay(1 * 1000);
+			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
+			reservaPage.iniciamosReserva(btnTexto);
+		});
+		
+		When("Ingresamos nuestros datos en el formulario:", (DataTable datosReserva)->{
+			UtilDelay.coolDelay(5 * 1000);
+			List<String> datos = datosReserva.asList();
+			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage(
+					datos.get(0),
+					datos.get(1),
+					datos.get(2),
+					datos.get(3),
+					datos.get(4),
+					datos.get(5)
+					);
+			reservaPage.ingresamosDatosReserva();
+			
+		});
+		
+		And("Se habilita el boton {string}, continuamos", (String btnTexto)->{
+			UtilDelay.coolDelay(1 * 1000);
+		});
+		
+		And("comprobamos el resumen de la reserva", ()->{
+			UtilDelay.coolDelay(1 * 1000);
+		});
+		
+		And("presionamos el boton {string}", (String btnTexto)->{
+			UtilDelay.coolDelay(1 * 1000);
+		});
+		
+		Then("se nos pide ingresar los datos de pago/tarjeta:", (DataTable datosTarjeta)->{
+			UtilDelay.coolDelay(1 * 1000);
+			throw new io.cucumber.java8.PendingException();
+		});
+		
+		And("al reservar con {string} nos confirma la reserva", (String btnTexto)->{
+			UtilDelay.coolDelay(1 * 1000);
+		});
 		
 		
 		After(()->{

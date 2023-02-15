@@ -44,7 +44,7 @@ public class EscogeHabitacionPage extends BaseAppium {
 		WebElement ePrice = habitacion.findElement(AppiumBy.id("com.booking:id/price_view_price"));
 		String strPrice = ePrice.getText();
 
-		habitacion.click();
+		habitacion.findElement(AppiumBy.xpath("//android.widget.LinearLayout/android.widget.LinearLayout[1]")).click();
 		
 		Double dPrice = Utility.numberFromString(strPrice);
 		

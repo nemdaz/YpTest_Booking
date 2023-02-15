@@ -24,13 +24,13 @@ Feature: Realizar reserva de habitación en Booking.com.
   	
   Scenario: Reservar y pagar
   	Given Previamente se verifico el detalle de la habitación, presionamos boton "Reserva ahora"
-  	When se muestra la interfaz para ingresar nuestros datos
-  	And Ingresamos nuestros datos:
+  	When Ingresamos nuestros datos en el formulario:
   		|Juan|
   		|Cardenas|
   		|jcard@test.info|
   		|Perú|
   		|987654321|
+  		|Ocio|
   	And Se habilita el boton "Siguiente paso", continuamos
   	And comprobamos el resumen de la reserva
   	And presionamos el boton "Último paso"

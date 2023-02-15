@@ -48,7 +48,6 @@ public class ListaHotelesPage extends BaseAppium{
 	}
 
 	public boolean muestraDetalleHotel() {
-		UtilDelay.coolDelay(1 * 1000);
 		try {
 			List<WebElement> vistaDetalle = adriver.findElements(AppiumBy.id("com.booking:id/listLayout"));
 			if(vistaDetalle.size() > 0) return true;

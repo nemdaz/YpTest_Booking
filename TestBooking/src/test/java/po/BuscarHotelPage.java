@@ -203,7 +203,7 @@ public class BuscarHotelPage extends BaseAppium {
 		
 		int maxIntent = 1;
 		while(!ageSelected.getText().contains(String.valueOf(edad)) && maxIntent < 20) {
-			System.out.println("Se selecciona una edad ...");
+			System.out.println("Escogiendo edad ...");
 			ageDown.click();
 			ageSelected = agePanel.findElement(AppiumBy.id("android:id/numberpicker_input"));
 			maxIntent++;
