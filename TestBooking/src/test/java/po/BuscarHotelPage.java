@@ -91,14 +91,16 @@ public class BuscarHotelPage extends BaseAppium {
 		UtilDriver.waitUntilVisible("com.booking:id/calendar_month_list", 5);
 		
 		WebElement calendarioContainer = adriver.findElement(AppiumBy.id("com.booking:id/calendar_month_list"));
+		
 		WebElement fechaMesI = calendarioContainer
 				.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"" + checkin + "\"]"));
 		fechaMesI.click();
+		
 		WebElement fechaMesF = calendarioContainer
 				.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"" + checkout + "\"]"));
 		fechaMesF.click();
 
-		UtilDelay.coolDelay(2000);
+		UtilDelay.coolDelay(1 * 1000);
 		WebElement btnConfirmaFechas = adriver.findElement(AppiumBy.id("com.booking:id/facet_date_picker_confirm"));
 		btnConfirmaFechas.click();
 	}

@@ -20,16 +20,16 @@ import base.BaseAppium;
 import dto.ReservaDTO;
 
 public class ReservaStepsDefinition implements En {
+	
+	final BaseAppium apiumBase = new BaseAppium();
+	final ReservaDTO reservaObj = new ReservaDTO();
+	final BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
+	final ListaHotelesPage listaHoteles = new ListaHotelesPage();
+	final EscogeHabitacionPage escogeHabitacionPage = new EscogeHabitacionPage();
+	final ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
+	final TerminaReservaPage reservaFinPage = new TerminaReservaPage();
 
 	public ReservaStepsDefinition() {
-		
-		BaseAppium apiumBase = new BaseAppium();
-		ReservaDTO reservaObj = new ReservaDTO();
-		BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
-		ListaHotelesPage listaHoteles = new ListaHotelesPage();
-		EscogeHabitacionPage escogeHabitacionPage = new EscogeHabitacionPage();
-		ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
-		TerminaReservaPage reservaFinPage = new TerminaReservaPage();
 		
 		Before(()->{
 			//apiumBase.startService();
@@ -38,18 +38,22 @@ public class ReservaStepsDefinition implements En {
 		// SCRENARIO
 		Given("Iniciamos la aplicación en la patalla de búsqueda.", () -> {
 			apiumBase.startDriver();
-			UtilDelay.coolDelay(2000);
 		});
 		
 		When("ingresamos el pais o region - {string} - donde hospedarnos.", (String destino) -> {
+			UtilDelay.coolDelay(2 * 1000);
+			
 			reservaObj.setDestino(destino);
 			buscarHotelPage.destino = destino;
 			buscarHotelPage.ingresaDestino();
+			
 			UtilDelay.coolDelay(1 * 1000);
 			buscarHotelPage.seleccionaOpcionesDestino(2);
 		});
 		
 		And("para el rango de fechas {string} y {string}", (String checkin, String checkout) -> {
+			UtilDelay.coolDelay(1 * 1000);
+			
 			reservaObj.setFechaIngreso(checkin);
 			reservaObj.setFechaSalida(checkout);
 			
@@ -59,6 +63,8 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		And("que disponga de {int} habitacion para {int} adultos", (Integer cantHabitacion, Integer cantAdultos) -> {
+			UtilDelay.coolDelay(1 * 1000);
+			
 			reservaObj.setCantidadAdultos(cantAdultos);
 			reservaObj.setCantidadHabitaciones(cantHabitacion);
 			
@@ -84,6 +90,7 @@ public class ReservaStepsDefinition implements En {
 			UtilDelay.coolDelay(2 * 1000);
 			
 			List<String> resultado = listaHoteles.listaResultadoHoteles();
+			System.out.println("Valor de no hoteles: " + listaHoteles.cantNoHoteles);
 			assertTrue( minCant <= resultado.size());
 		});
 		
@@ -91,6 +98,7 @@ public class ReservaStepsDefinition implements En {
 		Given("Estamos en la lista de resulado, seleccionamos el resultado {int} de la lista.", (Integer position)->{
 			UtilDelay.coolDelay(2 * 1000);
 			
+			System.out.println("Valor de no hoteles (GIVEN): " + listaHoteles.cantNoHoteles);
 			listaHoteles.seleccionaPos = position;
 			listaHoteles.seleccionaHotel();
 		});

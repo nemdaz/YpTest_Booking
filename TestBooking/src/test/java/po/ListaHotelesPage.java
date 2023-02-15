@@ -13,11 +13,6 @@ import utils.UtilDelay;
 public class ListaHotelesPage extends BaseAppium{
 	public int seleccionaPos;
 	public int cantNoHoteles;
-
-	public ListaHotelesPage(int seleccionaPos) {
-		super();
-		this.seleccionaPos = (seleccionaPos > 0)? seleccionaPos -1 : 0;
-	}
 	
 	public ListaHotelesPage() {
 		super();
@@ -26,7 +21,6 @@ public class ListaHotelesPage extends BaseAppium{
 	public List<String> listaResultadoHoteles() {
 		WebElement containerResultados = adriver.findElement(AppiumBy.id("com.booking:id/results_list_facet")); //FrameLayout
 		List<WebElement> listaHoteles = containerResultados.findElements(AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup"));
-		//listaHoteles.remove(0); // Quita texto de cantidad de hoteles
 		List<String> resultadoHoteles = new ArrayList<>();
 		
 		String nameHotelXpath = "//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView";
@@ -45,15 +39,22 @@ public class ListaHotelesPage extends BaseAppium{
 		for (String string : resultadoHoteles) {
 			System.out.printf("Hotel en lista: %s\n", string);
 		}
+		System.out.printf("otros omitidos: %s\n", this.cantNoHoteles);
 		
 		return resultadoHoteles;
 	}
 	
 	public void seleccionaHotel() {
+		
+		this.listaResultadoHoteles(); // Recalculated this.cantNoHoteles
+		
 		WebElement containerResultados = adriver.findElement(AppiumBy.id("com.booking:id/results_list_facet")); //FrameLayout
 		List<WebElement> listaHoteles = containerResultados.findElements(AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup"));
-				
-		WebElement hotel = listaHoteles.get(this.seleccionaPos + this.cantNoHoteles);
+		
+		int finalPosition = (this.seleccionaPos + this.cantNoHoteles) - 1;
+		System.out.printf("Selecciona hotel, posicion final (%s + %s - 1) : %s\n", this.seleccionaPos, this.cantNoHoteles, finalPosition);
+		
+		WebElement hotel = listaHoteles.get(finalPosition);
 		hotel.click();
 		
 	}

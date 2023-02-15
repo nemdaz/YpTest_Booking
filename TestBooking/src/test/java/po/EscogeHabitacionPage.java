@@ -15,13 +15,6 @@ public class EscogeHabitacionPage extends BaseAppium {
 	public EscogeHabitacionPage() {
 		
 	}
-	
-	public EscogeHabitacionPage(int posicionHabitacion) {
-		super();
-		this.posicionHabitacion = (posicionHabitacion > 0)? posicionHabitacion -1 : 0;
-	}
-
-
 
 	public boolean muestraHabitaciones() {
 		WebElement nodeHab = adriver.findElement(AppiumBy.id("com.booking:id/rooms_recycler_view"));
@@ -40,7 +33,7 @@ public class EscogeHabitacionPage extends BaseAppium {
 	public Double seleccionaHabitacion() {
 		WebElement nodeHab = adriver.findElement(AppiumBy.id("com.booking:id/rooms_recycler_view"));
 		List<WebElement> habitaciones = nodeHab.findElements(AppiumBy.id("com.booking:id/room_list_card_wrapper_container"));
-		WebElement habitacion = habitaciones.get(this.posicionHabitacion);
+		WebElement habitacion = habitaciones.get(this.posicionHabitacion - 1);
 		WebElement ePrice = habitacion.findElement(AppiumBy.id("com.booking:id/price_view_price"));
 		String strPrice = ePrice.getText();
 
