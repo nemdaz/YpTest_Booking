@@ -6,6 +6,7 @@ import po.BuscarHotelPage;
 import po.EscogeHabitacionPage;
 import po.ListaHotelesPage;
 import po.ReservaHabitacionPage;
+import po.TerminaReservaPage;
 import utils.Utility;
 import utils.UtilDelay;
 
@@ -67,13 +68,15 @@ public class ReservaStepsDefinition implements En {
 		});
 		
 		And("hacemos click en el boton {string}", (String btnBuscar) -> {
+			UtilDelay.coolDelay(2 * 1000);
 			BuscarHotelPage buscarHotelPage = new BuscarHotelPage();
 			buscarHotelPage.buscamosHoteles();
 		});
 		
 		Then("se muestra la lista de hoteles con al menos {int} resultados cumplen los criterios.", (Integer minCant) -> {
-			ListaHotelesPage buscarHotelPage = new ListaHotelesPage();
-			List<String> resultado = buscarHotelPage.listaResultadoHoteles();
+			UtilDelay.coolDelay(2 * 1000);
+			ListaHotelesPage listaHoteles = new ListaHotelesPage();
+			List<String> resultado = listaHoteles.listaResultadoHoteles();
 			assertTrue( minCant <= resultado.size());
 		});
 		
@@ -149,23 +152,34 @@ public class ReservaStepsDefinition implements En {
 		
 		And("Se habilita el boton {string}, continuamos", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
+			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
+			reservaPage.comprobamosDetalleReserva(btnTexto);
 		});
 		
-		And("comprobamos el resumen de la reserva", ()->{
+		And("comprobamos el resumen de la reserva y presionamos el boton {string}", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
+			ReservaHabitacionPage reservaPage = new ReservaHabitacionPage();
+			reservaPage.comprobamosResumenReserva(btnTexto);
 		});
 		
-		And("presionamos el boton {string}", (String btnTexto)->{
-			UtilDelay.coolDelay(1 * 1000);
-		});
-		
-		Then("se nos pide ingresar los datos de pago/tarjeta:", (DataTable datosTarjeta)->{
-			UtilDelay.coolDelay(1 * 1000);
-			throw new io.cucumber.java8.PendingException();
+		Then("se nos pide ingresar los datos de tarjeta:", (DataTable datosTarjeta)->{
+			UtilDelay.coolDelay(4 * 1000);
+			List<String> datCard = datosTarjeta.asList(); 
+			TerminaReservaPage reservaFinPage = new TerminaReservaPage(
+					datCard.get(0),
+					datCard.get(1),
+					datCard.get(2),
+					datCard.get(3)
+					);
+			reservaFinPage.ingresamosDatosTarjeta();
 		});
 		
 		And("al reservar con {string} nos confirma la reserva", (String btnTexto)->{
 			UtilDelay.coolDelay(1 * 1000);
+			//Verificamos montos
+			TerminaReservaPage reservaFinPage = new TerminaReservaPage();
+			
+			
 		});
 		
 		

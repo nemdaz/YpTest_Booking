@@ -1,11 +1,16 @@
 package po;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import base.BaseAppium;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
 public class ReservaHabitacionPage extends BaseAppium {
 
@@ -49,8 +54,76 @@ public class ReservaHabitacionPage extends BaseAppium {
 		System.out.println("Ingresamos los datos de reserva");
 		//Nombre
 		WebElement nombreEle = adriver.findElement(AppiumBy.id("com.booking:id/bstage1_contact_firstname_value"));
-		WebElement nombreIpt = nombreEle.findElement(AppiumBy.id("com.booking:id/bui_input_container_background"));
+		WebElement nombreIpt = nombreEle.findElement(AppiumBy.id("com.booking:id/bui_input_container_content"));
 		//nombreIpt.sendKeys(this.cliNombres); // No funciona, input seguros por codigo del APK
+		nombreIpt.click(); //Open keyboard
+		new Actions(adriver).sendKeys(this.cliNombres).perform();
+		//if(adriver.isKeyboardShown()) adriver.hideKeyboard();
+		
+		//Apellidos
+		WebElement apellidoEle = adriver.findElement(AppiumBy.id("com.booking:id/bstage1_contact_lastname_value"));
+		WebElement apellidoIpt = apellidoEle.findElement(AppiumBy.id("com.booking:id/bui_input_container_content"));
+		apellidoIpt.click();
+		new Actions(adriver).sendKeys(this.cliApellidos).perform();
+		//adriver.hideKeyboard();
+		
+		//EMail
+		WebElement emailEle = adriver.findElement(AppiumBy.id("com.booking:id/bstage1_contact_email_value"));
+		WebElement emailIpt = emailEle.findElement(AppiumBy.id("com.booking:id/bui_input_container_content"));
+		emailIpt.click();
+		new Actions(adriver).sendKeys(this.cliCorreoE).perform();
+		//adriver.hideKeyboard();
+		
+		//Pais-Region
+		WebElement paregEle = adriver.findElement(AppiumBy.id("com.booking:id/bstage1_contact_country_value"));
+		WebElement paregIpt = paregEle.findElement(AppiumBy.id("com.booking:id/bui_input_container_content"));
+		//paregIpt.click();
+		//paregIpt.clear();
+		/*
+		int cntback = paregIpt.getText().length();
+		for (int i = 0; i < cntback; i++) {
+			System.out.println("Key back ...");
+			adriver.pressKey(new KeyEvent());
+		}*/
+		//new Actions(adriver).sendKeys(this.cliPaisRegion).perform();
+		//adriver.hideKeyboard();
+		
+		//Telefono
+		WebElement telefoEle = adriver.findElement(AppiumBy.id("com.booking:id/bstage1_contact_telephone_value"));
+		WebElement telefoIpt = telefoEle.findElement(AppiumBy.id("com.booking:id/bui_input_container_content"));
+		telefoIpt.click();
+		new Actions(adriver).sendKeys(this.cliNumTelf).perform();
+		//adriver.hideKeyboard();
+		
+		//Motivo
+		List<WebElement> propoGroupEle = adriver.findElements(AppiumBy.id("com.booking:id/business_purpose_container"));
+		for (WebElement propoElement : propoGroupEle) {
+			System.out.printf("Motivo [%s]: Click en radio button coincidente ... ", this.cliProposito);
+			if(this.cliProposito.contains(propoElement.getText()) || propoElement.getText().contains(this.cliProposito)) {
+				if(propoElement.getAttribute("checked") != "true") {
+					propoElement.click();
+					System.out.print("Click\n");
+				}
+				break;
+			}
+		}		
+		
+	}
+	
+	public void comprobamosDetalleReserva(String btnTexto) {
+		WebElement infoContainer = adriver.findElement(AppiumBy.id("com.booking:id/informative_click_to_action_container"));
+		WebElement nextAction = infoContainer.findElement(AppiumBy.id("com.booking:id/action_button"));
+		if(nextAction.getText().trim().contains(btnTexto) || btnTexto.contains(nextAction.getText().trim())) {
+			nextAction.click();
+		}
+	}
+	
+	public void comprobamosResumenReserva(String btnTexto) {
+		WebElement infoContainer = adriver.findElement(AppiumBy.id("com.booking:id/informative_click_to_action_container"));
+		WebElement nextAction = infoContainer.findElement(AppiumBy.id("com.booking:id/action_button"));
+		if(nextAction.getText().trim().contains(btnTexto) || btnTexto.contains(nextAction.getText().trim())) {
+			nextAction.click();
+		}
 	}
 
 }

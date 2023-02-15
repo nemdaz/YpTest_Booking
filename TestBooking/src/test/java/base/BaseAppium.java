@@ -32,6 +32,9 @@ public class BaseAppium {
 		cap.setCapability("appPackage", "com.booking");
 		cap.setCapability("appActivity", "com.booking.appindex.presentation.activity.SearchActivity");
 		cap.setCapability("ignoreHiddenApiPolicyError", true);
+		// -- Enable Keyboard
+		cap.setCapability("unicodeKeyboard", false); //If false enable show keyboard
+		cap.setCapability("resetKeyboard", false); //If false enable show keyboard
 	}
 	
 	//START SERVER

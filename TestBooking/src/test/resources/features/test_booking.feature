@@ -32,9 +32,8 @@ Feature: Realizar reserva de habitación en Booking.com.
   		|987654321|
   		|Ocio|
   	And Se habilita el boton "Siguiente paso", continuamos
-  	And comprobamos el resumen de la reserva
-  	And presionamos el boton "Último paso"
-  	Then se nos pide ingresar los datos de pago/tarjeta:
+  	And comprobamos el resumen de la reserva y presionamos el boton "Último paso"
+  	Then se nos pide ingresar los datos de tarjeta:
   		|4555788765443333|
   		|Maria Rosa Garcia Garcia|
   		|02/25|
