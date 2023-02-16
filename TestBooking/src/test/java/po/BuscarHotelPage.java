@@ -2,6 +2,7 @@ package po;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -85,19 +86,28 @@ public class BuscarHotelPage extends BaseAppium {
 	public void seleccionaFechas() {
 		String iF = "dd/MM/yyyy";
 		String sF = "dd MMMM yyyy";
+		Date dateCheckin = Utility.dateFromString(this.fecIngreso, iF);
 		String checkin = Utility.dateChangeFormat(this.fecIngreso, iF, sF);
 		String checkout = Utility.dateChangeFormat(this.fecSalida, iF, sF);
+		
+		long difIni = Utility.dateDiferenceDays(Utility.dateFromString(this.fecIngreso, iF), new Date());
+		if( difIni < 0) {
+			dateCheckin = Utility.dateAddDays(dateCheckin, Math.abs(difIni));
+			System.out.printf("La fecha de Ingreso es menor a la actual, se cambia ... %s\n", dateCheckin);
+			checkin = Utility.dateToString(dateCheckin, sF);
+		}
+		
 		// Action
 		UtilDriver.waitUntilVisible("com.booking:id/calendar_month_list", 5);
 		
 		WebElement calendarioContainer = adriver.findElement(AppiumBy.id("com.booking:id/calendar_month_list"));
 		
 		WebElement fechaMesI = calendarioContainer
-				.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"" + checkin + "\"]"));
-		fechaMesI.click();
-		
+				.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"" + checkin + "\"]"));		
 		WebElement fechaMesF = calendarioContainer
 				.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"" + checkout + "\"]"));
+		
+		fechaMesI.click();		
 		fechaMesF.click();
 
 		UtilDelay.coolDelay(1 * 1000);

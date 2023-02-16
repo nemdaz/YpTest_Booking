@@ -1,6 +1,7 @@
 package base;
 
 import java.net.URL;
+import java.util.Locale;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -18,14 +19,14 @@ public class BaseAppium {
 	protected String IP;
 	protected Integer PORT;
 
-	public BaseAppium() {
+	public BaseAppium() {		
 		IP = "127.0.0.1";
 		PORT = 4723;
 		//
 		cap = new DesiredCapabilities();
 		cap.setCapability("automationName", "UiAutomator2");
-		//cap.setCapability("udid", "a58c4cdf");
-		cap.setCapability("udid", "HA1M6XDH"); 
+		cap.setCapability("udid", "a58c4cdf");
+		//cap.setCapability("udid", "HA1M6XDH"); 
 		cap.setCapability("deviceName", "Xiaomi");
 		cap.setCapability("platformName", "Android");
 		cap.setCapability("platformVersion", "13.0.0");
